@@ -18,6 +18,5 @@ jobs:
     
     - name: get plugins list from plugins yaml
       run: |
-        PLUGINS = yq eval .plugins plugins.yaml
-        echo ${PLUGINS}
+        echo ${yq eval .plugins plugins.yaml}
       shell: bash
