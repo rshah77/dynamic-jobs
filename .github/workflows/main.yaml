@@ -22,6 +22,14 @@ jobs:
     - name: authenticate with GH
       run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
     
+    - name: get GH token
+      run: echo ${{ secrets.GITHUB_TOKEN }} > token.txt
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: gh-token
+        path: token.txt
+
     - name: get plugins list from plugins yaml
       run: |
         PLUGINS=$(yq eval .plugins plugins.yaml)
@@ -30,5 +38,6 @@ jobs:
         do
             echo $plugin
             gh workflow run plugin_template.yaml -f plugin_type=$plugin
+            gh run watch 
         done
       shell: bash
