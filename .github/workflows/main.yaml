@@ -8,11 +8,14 @@ on:
     branches:
       - main
       
-  jobs:
+jobs:
   test_job:
     name: My first job
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         plugin_types: ["project", "epa", "iam"]
-    call-workflow-1:
-      uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@patch-1
+    steps:
+    - uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@patch-1
+      with:
+        plugin_type: ${{ matric.plugin_type }}
