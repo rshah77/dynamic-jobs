@@ -14,5 +14,5 @@ jobs:
     steps:
     - name: Display the environment variables and their values
       run: |
-        echo "running terraform plan for ${{ inputs.plugin_type }}!!"
+        echo "running terraform plan for ${{ github.event.inputs.plugin_type }}!!"
       
