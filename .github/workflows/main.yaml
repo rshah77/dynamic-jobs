@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v2
       
     - name: list direcotry contents
-      run: ls
+      run: ls -al
       
     - name: authenticate with GH
       run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
@@ -25,8 +25,9 @@ jobs:
     - name: get plugins list from plugins yaml
       run: |
         PLUGINS=$(yq eval .plugins plugins.yaml)
+        cd .github/workflows/
         for plugin in $PLUGINS
         do
-            gh workflow run ./.github/workflows/plugin_template.yaml -f plugin_type=$plugin
+            gh workflow run plugin_template.yaml -f plugin_type=$plugin
         done
       shell: bash
