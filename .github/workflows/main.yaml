@@ -12,10 +12,11 @@ jobs:
   test_job:
     name: My first job
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        plugin_types: ["project", "epa", "iam"]
     steps:
-    - uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@main
-      with:
-        plugin_type: ${{ matric.plugin_type }}
+    - name: checkout repo
+      uses: action/checkout@v2
+    
+    - name: get plugins list from plugins yaml
+      run: |
+        PLUGINS = yq r plugins.yaml plugins.*
+        echo PLUGINS
