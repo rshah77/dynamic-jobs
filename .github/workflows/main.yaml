@@ -12,10 +12,22 @@ jobs:
   test_job:
     name: My first job
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        plugin_types: ["project", "epa", "iam"]
     steps:
-    - uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@main
-      with:
-        plugin_type: ${{ matric.plugin_type }}
+    - name: checkout repo
+      uses: actions/checkout@v2
+      
+    - name: list direcotry contents
+      run: ls -al
+      
+    - name: authenticate with GH
+      run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+    
+    - name: get plugins list from plugins yaml
+      run: |
+        PLUGINS=$(yq eval .plugins plugins.yaml)
+        cd .github/workflows/
+        for plugin in $PLUGINS
+        do
+            gh workflow run plugin_template.yaml -f plugin_type=$plugin
+        done
+      shell: bash
