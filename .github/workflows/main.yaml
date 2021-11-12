@@ -16,6 +16,6 @@ jobs:
       matrix:
         plugin_types: ["project", "epa", "iam"]
     steps:
-    - uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@patch-1
+    - uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@main
       with:
         plugin_type: ${{ matric.plugin_type }}
