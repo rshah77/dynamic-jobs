@@ -1,0 +1,18 @@
+name: Reusable Plugin workflow
+
+on:
+  workflow_call:
+    inputs:
+      plugin_type:
+        required: true
+        type: string
+
+jobs:
+  plan:
+    name: Pass input and secrets to my-action
+    runs-on: ubuntu-latest
+    steps:
+    - name: Display the environment variables and their values
+      run: |
+        echo "running terraform plan for ${{ inputs.plugin_type }}!!"
+      
