@@ -1,7 +1,7 @@
 name: Reusable Plugin workflow
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       plugin_type:
         required: true
