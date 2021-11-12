@@ -20,27 +20,16 @@ jobs:
       
     - name: list direcotry contents
       run: ls -al
-      
-    - name: authenticate with GH
-      run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
     
     - name: get plugins list from plugins yaml
       run: |
-        PLUGINS=$(yq eval .plugins plugins.yaml)
-        cd .github/workflows/
-        for plugin in $PLUGINS
-        do
-            echo $plugin
-            gh workflow run plugin_template.yaml -f plugin_type=$plugin
-        done
+        
+        echo "PLUGINS=$(yq eval .plugins plugins.yaml)" >> $GITHUB_ENV
       shell: bash
   
-    - run: |
-        curl \
-          -X POST \
-          -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          https://api.github.com/repos/LeiZhaoGFT/dynamic-jobs/actions/workflows/plugin_template.yaml/dispatches \
-          -d '{"ref":"main", "inputs": {"plugin_type": "project"} }'
+  call_workflow:
+    uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@main
+    with:
+      plugin_types: ${{ env.PLUGINS }}
     
 

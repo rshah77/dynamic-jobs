@@ -1,9 +1,9 @@
 name: Reusable Plugin workflow
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
-      plugin_type:
+      plugin_types:
         required: true
         type: string
 
@@ -11,8 +11,12 @@ jobs:
   plan:
     name: Pass input and secrets to my-action
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        plugin-types: ${{fromJson(inputs.plugin_types)}}
+        
     steps:
     - name: Display the environment variables and their values
       run: |
-        echo "running terraform plan for ${{ github.event.inputs.plugin_type }}!!"
-      
+        echo "running terraform plan for ${{ matrix.plugin-types }}!"
