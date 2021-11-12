@@ -1,4 +1,4 @@
 plugins:
-- project
-- epa
-- iam
+  project
+  epa
+  iam
