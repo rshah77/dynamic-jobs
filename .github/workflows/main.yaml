@@ -1,0 +1,18 @@
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
+  jobs:
+  test_job:
+    name: My first job
+    strategy:
+      matrix:
+        plugin_types: ["project", "epa", "iam"]
+    call-workflow-1:
+      uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@patch-1
