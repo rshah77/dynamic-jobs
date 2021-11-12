@@ -24,6 +24,6 @@ jobs:
         PLUGINS=$(yq eval .plugins plugins.yaml)
         for plugin in $PLUGINS
         do
-            gh workflow run LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@main -f plugin_type=$plugin
+            gh workflow run .github/workflows/plugin_template.yaml -f plugin_type=$plugin
         done
       shell: bash
