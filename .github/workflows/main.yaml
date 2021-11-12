@@ -30,7 +30,6 @@ jobs:
         do
             echo $plugin
             gh workflow run plugin_template.yaml -f plugin_type=$plugin
-            gh run watch plugin_template.yaml
         done
       shell: bash
   
