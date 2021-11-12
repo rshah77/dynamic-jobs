@@ -15,4 +15,4 @@ on:
       matrix:
         plugin_types: ["project", "epa", "iam"]
     call-workflow-1:
-      uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml
+      uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@patch-1
