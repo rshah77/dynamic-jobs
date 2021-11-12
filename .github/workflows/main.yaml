@@ -14,6 +14,8 @@ jobs:
   test_job:
     name: My first job
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step3.outputs.plugin }}
     steps:
     - name: checkout repo
       uses: actions/checkout@v2
@@ -21,15 +23,17 @@ jobs:
     - name: list direcotry contents
       run: ls -al
     
-    - name: get plugins list from plugins yaml
+    - id: step3
+      name: get plugins list from plugins yaml
       run: |
-        
-        echo "PLUGINS=$(yq eval .plugins plugins.yaml)" >> $GITHUB_ENV
+        PLUGINS=$(yq eval .plugins plugins.yaml)"
+        echo "::set-output name=plugin::$PLUGINS"
       shell: bash
   
   call_workflow:
+    needs: test_job
     uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@main
     with:
-      plugin_types: ${{ env.PLUGINS }}
+      plugin_types: echo ${{needs.test_job.outputs.output1}}
     
 
