@@ -30,6 +30,6 @@ jobs:
   call_workflow:
     uses: LeiZhaoGFT/dynamic-jobs/.github/workflows/plugin_template.yaml@main
     with:
-      plugin_type: ${{ env.PLUGINS }}
+      plugin_types: ${{ env.PLUGINS }}
     
 
