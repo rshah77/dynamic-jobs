@@ -24,7 +24,6 @@ jobs:
     
     - name: get plugins list from plugins yaml
       run: |
-        echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
         PLUGINS=$(yq eval .plugins plugins.yaml)
         cd .github/workflows/
         for plugin in $PLUGINS
