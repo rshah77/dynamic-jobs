@@ -39,6 +39,6 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           https://api.github.com/repos/LeiZhaoGFT/dynamic-jobs/actions/workflows/plugin_template.yaml/dispatches \
-          -d '{"ref":"main"}'
+          -d '{"ref":"main", "inputs": {"plugin_type": "project"} }'
     
 
