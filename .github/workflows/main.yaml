@@ -15,6 +15,9 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@v2
+      
+    - name: authenticate with GH
+      run: gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
     
     - name: get plugins list from plugins yaml
       run: |
