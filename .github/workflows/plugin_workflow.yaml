@@ -1,0 +1,15 @@
+name: Plugin workflow
+
+on:
+  workflow_run:
+    workflows: ["main"]
+    types: [completed]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Display the environment variables and their values
+        run: |
+          echo "running terraform plan for ${{ github.event.inputs.plugin_type }}!!"
